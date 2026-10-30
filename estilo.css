@@ -17,7 +17,7 @@ body {
     position: relative;
     width: 100%;
     height: 350px;
-    background-image: url('music2.jpg'); /* Substitua pelo caminho da sua imagem */
+    background-image: url('music2.jpg'); /* Certifique-se de que a imagem 'music2.jpg' está na mesma pasta */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -26,7 +26,7 @@ body {
     padding: 0 5%;
 }
 
-/* Overlay escuro sobre a imagem */
+/* Overlay escuro para melhorar contraste do título */
 .banner-hero::before {
     content: '';
     position: absolute;
@@ -37,7 +37,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4); 
 }
 
-/* Título alinhado à direita sobre o banner */
+/* Título alinhado à direita sobre a imagem */
 .banner-hero .titulo {
     position: relative;
     z-index: 1;
@@ -54,7 +54,7 @@ body {
     padding: 0 20px;
 }
 
-/* Cabeçalho de Navegação (Apenas o botão de voltar) */
+/* Cabeçalho do Catálogo */
 .header {
     display: flex;
     justify-content: flex-end;
@@ -85,6 +85,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
+    justify-items: center;
 }
 
 /* Estilo para cada Card em Formato de Disco de Vinil */
@@ -102,7 +103,6 @@ body {
     align-items: center;
     text-align: center;
     position: relative;
-    margin: 0 auto;
     border: 4px solid #1a1a1a;
 }
 
@@ -118,7 +118,7 @@ body {
     z-index: 2;
 }
 
-/* Textos dentro do centro do disco */
+/* Textos dentro do disco */
 .card-item h3 {
     font-size: 0.95rem;
     color: #fff;
@@ -133,7 +133,7 @@ body {
     z-index: 1;
 }
 
-/* Efeito ao passar o mouse (hover): eleva e roda ligeiramente */
+/* Efeito ao passar o mouse: eleva e roda suavemente */
 .card-item:hover {
     transform: translateY(-8px) rotate(15deg);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
@@ -161,6 +161,4 @@ body {
     }
 
     .header {
-        justify-content: center;
-    }
-}
+        justify-content: center
