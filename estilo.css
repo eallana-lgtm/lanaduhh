@@ -1,4 +1,4 @@
-/* Reset básico e tipografia */
+/* Reset e fundo escuro */
 * {
     margin: 0;
     padding: 0;
@@ -12,22 +12,21 @@ body {
     line-height: 1.6;
 }
 
-/* Banner Fixo com Imagem de Fundo */
+/* Banner topo com imagem e título à direita */
 .banner-hero {
     position: relative;
     width: 100%;
     height: 350px;
-    background-color: #1a1a1a; /* Cor de reserva se a imagem falhar */
-    background-image: url('music2.jpg'); /* Nome do ficheiro da sua imagem */
+    background-color: #1a1a1a;
+    background-image: url('music3jpg.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Alinha o título no lado direito */
+    justify-content: flex-end;
     padding: 0 5%;
 }
 
-/* Camada escura sobre a imagem para destacar o texto */
 .banner-hero::before {
     content: '';
     position: absolute;
@@ -38,7 +37,6 @@ body {
     background-color: rgba(0, 0, 0, 0.4); 
 }
 
-/* Título à direita sobre o banner */
 .banner-hero .titulo {
     position: relative;
     z-index: 1;
@@ -48,21 +46,18 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Container do Conteúdo Principal */
+/* Container do Conteúdo */
 .site-container {
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* Cabeçalho com o Botão de Navegação */
 .header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #333;
 }
 
 .btn-voltar {
@@ -73,31 +68,24 @@ body {
     text-decoration: none;
     border-radius: 6px;
     font-weight: 600;
-    transition: background 0.2s, transform 0.1s;
 }
 
-.btn-voltar:hover {
-    background-color: #4338ca;
-    transform: translateY(-2px);
-}
-
-/* Grid da Coleção de Itens */
+/* Grid e Discos de Vinil */
 #colecao {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 30px;
     justify-items: center;
 }
 
-/* Estilo para cada Card em Formato de Disco de Vinil */
 .card-item {
     background: radial-gradient(circle, #222 0%, #111 60%, #000 100%);
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    padding: 30px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -107,51 +95,30 @@ body {
     border: 4px solid #1a1a1a;
 }
 
-/* Furo central do disco */
 .card-item::before {
     content: '';
     position: absolute;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     background-color: #121212;
     border-radius: 50%;
     border: 2px solid #333;
     z-index: 2;
 }
 
-/* Textos no centro do disco */
 .card-item h3 {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: #fff;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     z-index: 1;
-    word-break: break-word;
 }
 
 .card-item p {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #bbb;
     z-index: 1;
 }
 
-/* Efeito ao passar o cursor por cima */
 .card-item:hover {
-    transform: translateY(-8px) rotate(15deg);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-    .banner-hero {
-        height: 200px;
-        padding: 0 20px;
-    }
-
-    .banner-hero .titulo {
-        font-size: 1.8rem;
-    }
-
-    .header {
-        justify-content: center;
-    }
+    transform: translateY(-8px) rotate(12deg);
 }
