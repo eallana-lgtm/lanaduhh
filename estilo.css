@@ -17,16 +17,17 @@ body {
     position: relative;
     width: 100%;
     height: 350px;
-    background-image: url('music2.jpg'); /* Certifique-se de que a imagem 'music2.jpg' está na mesma pasta */
+    background-color: #1a1a1a; /* Cor de reserva se a imagem falhar */
+    background-image: url('music2.jpg'); /* Nome do ficheiro da sua imagem */
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Alinha o título no lado direito */
     padding: 0 5%;
 }
 
-/* Overlay escuro para melhorar contraste do título */
+/* Camada escura sobre a imagem para destacar o texto */
 .banner-hero::before {
     content: '';
     position: absolute;
@@ -37,7 +38,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4); 
 }
 
-/* Título alinhado à direita sobre a imagem */
+/* Título à direita sobre o banner */
 .banner-hero .titulo {
     position: relative;
     z-index: 1;
@@ -54,7 +55,7 @@ body {
     padding: 0 20px;
 }
 
-/* Cabeçalho do Catálogo */
+/* Cabeçalho com o Botão de Navegação */
 .header {
     display: flex;
     justify-content: flex-end;
@@ -106,7 +107,7 @@ body {
     border: 4px solid #1a1a1a;
 }
 
-/* Furo central do disco de vinil */
+/* Furo central do disco */
 .card-item::before {
     content: '';
     position: absolute;
@@ -118,7 +119,7 @@ body {
     z-index: 2;
 }
 
-/* Textos dentro do disco */
+/* Textos no centro do disco */
 .card-item h3 {
     font-size: 0.95rem;
     color: #fff;
@@ -133,20 +134,10 @@ body {
     z-index: 1;
 }
 
-/* Efeito ao passar o mouse: eleva e roda suavemente */
+/* Efeito ao passar o cursor por cima */
 .card-item:hover {
     transform: translateY(-8px) rotate(15deg);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.7);
-}
-
-/* Mensagem de Erro */
-.erro {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: #e53e3e;
-    background-color: #fed7d7;
-    padding: 15px;
-    border-radius: 6px;
 }
 
 /* Responsividade */
@@ -161,4 +152,6 @@ body {
     }
 
     .header {
-        justify-content: center
+        justify-content: center;
+    }
+}
