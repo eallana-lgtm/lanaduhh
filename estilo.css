@@ -18,7 +18,7 @@ body {
     width: 100%;
     height: 350px;
     background-color: #1a1a1a;
-    background-image: url('music3jpg.jpg'); /* Nome da imagem salva na sua pasta */
+    background-image: url('music3jpg.jpg'); /* Certifica-te de que o nome do ficheiro de imagem está correto na tua pasta */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -135,22 +135,4 @@ body {
 }
 
 /* Efeito ao passar o cursor sobre o vinil */
-.card-item:hover {
-    transform: translateY(-8px) rotate(12deg);
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-    .banner-hero {
-        height: 200px;
-        padding: 0 20px;
-    }
-
-    .banner-hero .titulo {
-        font-size: 1.8rem;
-    }
-
-    .header {
-        justify-content: center;
-    }
-}
+.card-item
