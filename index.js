@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let audioAtual = null;
     let cardAtual = null;
 
-    // Tentar carregar lista dinâmica do backend Express
+    // Tentar carregar lista dinamica do backend Express
     async function carregarCatalogo() {
         try {
             const resposta = await fetch('/api/lista');
-            if (!resposta.ok) throw new Error('Servidor indisponível');
+            if (!resposta.ok) throw new Error('Servidor indisponivel');
             const dados = await resposta.json();
 
             if (Array.isArray(dados) && dados.length > 0) {
                 renderizarColecao(dados);
             }
         } catch (erro) {
-            console.log('A usar itens estáticos do HTML:', erro.message);
+            console.log('A usar itens estaticos do HTML:', erro.message);
         }
     }
 
-    // Função para renderizar novos itens vindos do banco/API
+    // Funcao para renderizar novos itens vindos do banco/API
     function renderizarColecao(itens) {
         if (!colecaoContainer) return;
         colecaoContainer.innerHTML = '';
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Gerenciador de reprodução via delegação de eventos no container principal
+    // Gerenciador de reproducao via delegacao de eventos no container principal
     if (colecaoContainer) {
         colecaoContainer.addEventListener('click', (e) => {
             const card = e.target.closest('.card-item');
@@ -68,13 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Parar música anterior se houver outra a tocar
+            // Parar musica anterior se houver outra a tocar
             if (audioAtual) {
                 audioAtual.pause();
                 audioAtual.currentTime = 0;
             }
 
-            // Criar e iniciar nova música
+            // Criar e iniciar nova musica
             audioAtual = new Audio(urlAudio);
             cardAtual = card;
 
@@ -98,5 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.remove('tocando');
                 cardAtual = null;
                 audioAtual = null;
-                console.error('Certifique-se de que o arquivo .mp3 está na pasta do projeto:', err);
+                console.error('Certifique-se de que o ficheiro .mp3 esta na pasta do projeto:', err);
             });
+        });
+    }
+
+    carregarCatalogo();
+});
