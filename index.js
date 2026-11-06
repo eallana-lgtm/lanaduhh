@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         colecaoContainer.innerHTML = '';
 
         itens.forEach(item => {
-            const card = document.createElement('div');
+            const card = document.createElement('article');
             card.classList.add('card-item');
 
             if (item.audio) {
@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.card-item');
 
         cards.forEach(card => {
-            // Garante que não duplica listeners de clique
             card.removeEventListener('click', tratarClique);
             card.addEventListener('click', tratarClique);
         });
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Se for o mesmo disco: alterna entre Play e Pause
         if (cardAtual === card && audioAtual) {
             if (audioAtual.paused) {
-                audioAtual.play();
+                audioAtual.play().catch(err => console.error('Erro ao reproduzir:', err));
                 card.classList.add('tocando');
             } else {
                 audioAtual.pause();
@@ -91,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.add('tocando');
             cardAtual = card;
         }).catch(err => {
+            card.classList.remove('tocando');
             console.error('Certifique-se de que o arquivo .mp3 está na pasta do projeto:', err);
         });
 
