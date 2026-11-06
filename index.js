@@ -12,12 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (Array.isArray(dados) && dados.length > 0) {
                 renderizarColecao(dados);
-            } else {
-                ativarEventosAudio();
             }
         } catch (erro) {
-            console.log('A usar itens estáticos do HTML.');
-            ativarEventosAudio();
+            console.log('A usar itens estáticos do HTML:', erro.message);
         }
     }
 
@@ -34,70 +31,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.setAttribute('data-audio', item.audio);
             }
 
+            const artista = item.artista || item.titulo || 'Desconhecido';
+            const musica = item.musica || item.descricao || '';
+            const seloTexto = artista.substring(0, 10).toUpperCase();
+
             card.innerHTML = `
                 <div class="texto-disco">
-                    <h3>${item.artista || item.titulo}</h3>
-                    <p>${item.musica || item.descricao || ''}</p>
+                    <h3>${artista}</h3>
+                    <p>${musica}</p>
                 </div>
                 <div class="selo-central">
-                    <span>${(item.artista || 'VINYL').substring(0, 10).toUpperCase()}</span>
+                    <span>${seloTexto}</span>
                 </div>
             `;
 
             colecaoContainer.appendChild(card);
         });
-
-        ativarEventosAudio();
     }
 
-    // Configura o clique em cada disco para tocar/pausar áudio
-    function ativarEventosAudio() {
-        const cards = document.querySelectorAll('.card-item');
+    // Gerenciador de reprodução via delegação de eventos no container principal
+    if (colecaoContainer) {
+        colecaoContainer.addEventListener('click', (e) => {
+            const card = e.target.closest('.card-item');
+            if (!card) return;
 
-        cards.forEach(card => {
-            card.removeEventListener('click', tratarClique);
-            card.addEventListener('click', tratarClique);
-        });
-    }
+            const urlAudio = card.getAttribute('data-audio');
+            if (!urlAudio) return;
 
-    function tratarClique(e) {
-        const card = e.currentTarget;
-        const urlAudio = card.getAttribute('data-audio');
-
-        if (!urlAudio) return;
-
-        // Se for o mesmo disco: alterna entre Play e Pause
-        if (cardAtual === card && audioAtual) {
-            if (audioAtual.paused) {
-                audioAtual.play().catch(err => console.error('Erro ao reproduzir:', err));
-                card.classList.add('tocando');
-            } else {
-                audioAtual.pause();
-                card.classList.remove('tocando');
+            // Se for o mesmo disco: alterna entre Play e Pause
+            if (cardAtual === card && audioAtual) {
+                if (audioAtual.paused) {
+                    audioAtual.play().catch(err => console.error('Erro ao reproduzir:', err));
+                } else {
+                    audioAtual.pause();
+                }
+                return;
             }
-            return;
-        }
 
-        // Parar música anterior se houver outra a tocar
-        if (audioAtual) {
-            audioAtual.pause();
-            if (cardAtual) cardAtual.classList.remove('tocando');
-        }
+            // Parar música anterior se houver outra a tocar
+            if (audioAtual) {
+                audioAtual.pause();
+                audioAtual.currentTime = 0;
+            }
 
-        // Iniciar nova música
-        audioAtual = new Audio(urlAudio);
-        audioAtual.play().then(() => {
-            card.classList.add('tocando');
+            // Criar e iniciar nova música
+            audioAtual = new Audio(urlAudio);
             cardAtual = card;
-        }).catch(err => {
-            card.classList.remove('tocando');
-            console.error('Certifique-se de que o arquivo .mp3 está na pasta do projeto:', err);
-        });
 
-        audioAtual.onended = () => {
-            card.classList.remove('tocando');
-        };
-    }
+            // Handlers para controle de estado visual do card
+            audioAtual.addEventListener('play', () => {
+                card.classList.add('tocando');
+            });
 
-    carregarCatalogo();
-});
+            audioAtual.addEventListener('pause', () => {
+                card.classList.remove('tocando');
+            });
+
+            audioAtual.addEventListener('ended', () => {
+                card.classList.remove('tocando');
+                audioAtual = null;
+                cardAtual = null;
+            });
+
+            // Reproduz o som
+            audioAtual.play().catch(err => {
+                card.classList.remove('tocando');
+                cardAtual = null;
+                audioAtual = null;
+                console.error('Certifique-se de que o arquivo .mp3 está na pasta do projeto:', err);
+            });
