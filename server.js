@@ -4,17 +4,17 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares para ler JSON e dados de formulários
+// Middlewares para ler JSON e dados de formularios
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Servir arquivos estáticos da pasta do projeto (HTML, CSS, JS, MP3)
+// Servir ficheiros estaticos da pasta do projeto (HTML, CSS, JS, MP3)
 app.use(express.static(path.join(__dirname)));
 
-// Array em memória para salvar a lista do catálogo
+// Array em memoria para salvar a lista do catalogo
 let lista = [
     { artista: "Atalyba e A Firma", musica: "Feminina", audio: "feminina.mp3" },
-    { artista: "Marina Lima", musica: "Não Sei Dançar", audio: "nao-sei-dancar.mp3" },
+    { artista: "Marina Lima", musica: "Nao Sei Dancar", audio: "nao-sei-dancar.mp3" },
     { artista: "Angra", musica: "Wuthering Heights", audio: "wuthering-heights.mp3" },
     { artista: "Jeff Buckley", musica: "Lover, You Should've Come Over", audio: "lover-you-shouldve-come-over.mp3" }
 ];
@@ -24,13 +24,13 @@ app.get('/api/lista', (req, res) => {
     res.json(lista);
 });
 
-// Rota POST: Cadastra um novo disco no catálogo
+// Rota POST: Cadastra um novo disco no catalogo
 app.post('/api/lista', (req, res) => {
     const { artista, musica, audio } = req.body;
 
-    // Validação simples dos dados recebidos
+    // Validacao simples dos dados recebidos
     if (!artista || !musica) {
-        return res.status(400).json({ status: "erro", mensagem: "Campos 'artista' e 'musica' são obrigatórios." });
+        return res.status(400).json({ status: "erro", mensagem: "Campos artista e musica sao obrigatorios." });
     }
 
     const novaObra = {
@@ -43,7 +43,7 @@ app.post('/api/lista', (req, res) => {
     return res.status(201).json({ status: "sucesso", item: novaObra });
 });
 
-// Inicialização do servidor
+// Inicializacao do servidor
 app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor a rodar em http://localhost:${PORT}`);
 });
